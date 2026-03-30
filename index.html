@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bravos</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="#" class="logo-link">Code N Tools</a>
+            </div>
+            <nav class="nav">
+                <a href="#inicio">Inicio</a>
+                <a href="#sobre-mi">Sobre Mí</a>
+                <a href="#proyectos">Proyectos</a>
+                <a href="#contacto">Contacto</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="inicio" class="hero">
+            <div class="container">
+                <h2>Desarrollador Full Stack</h2>
+                <p>Especializado en crear aplicaciones web modernas, escalables y centradas en el usuario. Mi enfoque combina código limpio, arquitectura sólida y experiencias digitales que resuelven problemas reales.</p>
+            </div>
+        </section>
+
+        <section id="sobre-mi" class="about">
+            <div class="container">
+                <h2 class="section-title">Sobre Mí</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Desarrollador Full Stack</h3>
+                        <p>Soy un desarrollador apasionado por crear soluciones digitales que marquen la diferencia. Con experiencia en tecnologías modernas y un enfoque en la calidad del código, me especializo en construir aplicaciones web escalables, seguras y centradas en el usuario.</p>
+                        <p>Mi trayectoria incluye el desarrollo de plataformas empresariales, aplicaciones móviles y sistemas de automatización que han ayudado a empresas a optimizar sus procesos y mejorar su presencia digital.</p>
+                        <p>Siempre estoy aprendiendo y explorando nuevas tecnologías para ofrecer las mejores soluciones a mis clientes.</p>
+                    </div>
+                    <div class="about-image">
+                        <!-- Aquí podés poner tu foto o un avatar -->
+                        <div class="avatar-placeholder">
+                            <i class="fas fa-user-large"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="proyectos" class="projects">
+            <div class="container">
+                <h2 class="section-title">Mis Proyectos</h2>
+                <div class="projects-grid" id="projects-grid">
+                    <!-- Los proyectos se cargarán dinámicamente con JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="contact">
+            <div class="container">
+                <h2 class="section-title">Contacto</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h3>Hablemos</h3>
+                        <p>¿Tienes un proyecto en mente? ¡Me encantaría escucharlo!</p>
+                        <p>Completá el formulario y te responderé a la brevedad.</p>
+                        <div class="social-buttons">
+                            <a href="https://t.me/codentools_bot" target="_blank" rel="noopener noreferrer" class="btn-social btn-telegram">
+                                <i class="fab fa-telegram"></i> Telegram
+                            </a>
+                            <a href="https://www.instagram.com/codentools" target="_blank" rel="noopener noreferrer" class="btn-social btn-instagram">
+                                <i class="fab fa-instagram"></i> Instagram
+                            </a>
+                        </div>
+                    </div>
+                    <form class="contact-form" id="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">Nombre *</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Apellido *</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Correo electrónico *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Teléfono (opcional)</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensaje *</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Enviar mensaje</button>
+                        <div id="form-status" class="form-status"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 | CodeNTools. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
