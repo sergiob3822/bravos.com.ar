@@ -29,7 +29,7 @@
     </header>
 
     <main>
-        <section id="inicio" class="hero">
+        <section id="inicio" class="hero reveal">
             <div class="container">
                 <h2 class="hero-title">
                     <span class="hero-title-main">Desarrollo de aplicaciones y automatización</span>
@@ -40,7 +40,7 @@
             </div>
         </section>
 
-        <section id="sobre-mi" class="about">
+        <section id="sobre-mi" class="about reveal">
             <div class="container">
                 <h2 class="section-title">Sobre Mí</h2>
                 <div class="about-content">
@@ -75,13 +75,13 @@
 
         <section id="proyectos" class="projects">
             <div class="container">
-                <h2 class="section-title">Mis Proyectos</h2>
+                <h2 class="section-title reveal">Mis Proyectos</h2>
                 <div class="projects-grid" id="projects-grid">
                 </div>
             </div>
         </section>
 
-        <section id="contacto" class="contact">
+        <section id="contacto" class="contact reveal">
             <div class="container">
                 <h2 class="section-title">Contacto</h2>
                 <div class="contact-content">
@@ -129,11 +129,31 @@
         </section>
     </main>
 
-    <footer class="footer">
+    <footer class="footer reveal">
         <div class="container">
             <p>&copy; 2026 | CodeNTools. Todos los derechos reservados.</p>
         </div>
     </footer>
+
+    <div id="project-lightbox" class="project-lightbox" hidden aria-hidden="true">
+        <div class="project-lightbox-backdrop" data-lightbox-close tabindex="-1"></div>
+        <div class="project-lightbox-panel" role="dialog" aria-modal="true" aria-labelledby="project-lightbox-title">
+            <button type="button" class="project-lightbox-close" aria-label="Cerrar galería">
+                <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
+            <h2 id="project-lightbox-title" class="project-lightbox-heading"></h2>
+            <div class="project-lightbox-frame">
+                <img class="project-lightbox-img" alt="" width="1600" height="1000" decoding="async" fetchpriority="high">
+                <button type="button" class="project-lightbox-nav project-lightbox-nav--prev" aria-label="Imagen anterior">
+                    <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="project-lightbox-nav project-lightbox-nav--next" aria-label="Imagen siguiente">
+                    <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                </button>
+            </div>
+            <p class="project-lightbox-counter" aria-live="polite"></p>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
