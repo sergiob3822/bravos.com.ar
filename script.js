@@ -1,9 +1,20 @@
 const SUPABASE_URL =
+    (typeof window !== 'undefined' &&
+        window.__SUPABASE &&
+        typeof window.__SUPABASE.url === 'string' &&
+        window.__SUPABASE.url.trim()) ||
     (typeof process !== 'undefined' && process.env && process.env.NEXT_PUBLIC_SUPABASE_URL) ||
-    'TU_SUPABASE_URL_AQUI';
+    'https://dzxfguflubuzwwrurouh.supabase.co';
 const SUPABASE_ANON_KEY =
+    (typeof window !== 'undefined' &&
+        window.__SUPABASE &&
+        typeof window.__SUPABASE.anonKey === 'string' &&
+        window.__SUPABASE.anonKey.trim()) ||
     (typeof process !== 'undefined' && process.env && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) ||
     'TU_SUPABASE_ANON_KEY_AQUI';
+
+const CONTACT_TABLE = 'contactos';
+const CONTACT_COLUMNS = 'es';
 
 const DEFAULT_PROJECT_IMAGE =
     'data:image/svg+xml,' +
@@ -553,7 +564,7 @@ async function initializeForm() {
     const form = document.getElementById('contact-form');
     if (!form) return;
 
-    if (SUPABASE_URL === 'TU_SUPABASE_URL_AQUI' || SUPABASE_ANON_KEY === 'TU_SUPABASE_ANON_KEY_AQUI') {
+    if (!SUPABASE_ANON_KEY || SUPABASE_ANON_KEY === 'TU_SUPABASE_ANON_KEY_AQUI') {
         return;
     }
 
@@ -567,32 +578,50 @@ async function initializeForm() {
             const submitBtn = form.querySelector('.btn-submit');
             const statusDiv = document.getElementById('form-status');
             const formData = new FormData(form);
-            const data = {
-                first_name: formData.get('firstName'),
-                last_name: formData.get('lastName'),
-                email: formData.get('email'),
-                phone: formData.get('phone') || null,
-                message: formData.get('message'),
-                created_at: new Date().toISOString()
-            };
+            const firstName = String(formData.get('firstName') || '').trim();
+            const lastName = String(formData.get('lastName') || '').trim();
+            const email = String(formData.get('email') || '').trim();
+            const phoneRaw = formData.get('phone');
+            const phone = phoneRaw && String(phoneRaw).trim() ? String(phoneRaw).trim() : null;
+            const message = String(formData.get('message') || '').trim();
 
-            if (!data.first_name || !data.last_name || !data.email || !data.message) {
+            if (!firstName || !lastName || !email || !message) {
                 showStatus(statusDiv, 'Por favor, completá todos los campos requeridos.', 'error');
                 return;
             }
+
+            const row =
+                CONTACT_COLUMNS === 'es'
+                    ? {
+                          nombre: firstName,
+                          apellido: lastName,
+                          email: email,
+                          telefono: phone,
+                          mensaje: message,
+                          created_at: new Date().toISOString()
+                      }
+                    : {
+                          first_name: firstName,
+                          last_name: lastName,
+                          email: email,
+                          phone: phone,
+                          message: message,
+                          created_at: new Date().toISOString()
+                      };
 
             submitBtn.disabled = true;
             submitBtn.textContent = 'Enviando...';
             showStatus(statusDiv, '', 'hidden');
 
             try {
-                const { error } = await supabase.from('contacts').insert([data]);
+                const { error } = await supabase.from(CONTACT_TABLE).insert([row]);
 
                 if (error) throw error;
 
                 showStatus(statusDiv, '¡Mensaje enviado con éxito! Te responderé pronto.', 'success');
                 form.reset();
-            } catch {
+            } catch (err) {
+                console.error('Supabase contactos:', err);
                 showStatus(
                     statusDiv,
                     'Hubo un error al enviar el mensaje. Por favor, intentá de nuevo.',
