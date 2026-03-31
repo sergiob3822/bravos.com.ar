@@ -13,8 +13,7 @@ const SUPABASE_ANON_KEY =
     (typeof process !== 'undefined' && process.env && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) ||
     'TU_SUPABASE_ANON_KEY_AQUI';
 
-const CONTACT_TABLE = 'contactos';
-const CONTACT_COLUMNS = 'es';
+const CONTACT_TABLE = 'contacts';
 
 const DEFAULT_PROJECT_IMAGE =
     'data:image/svg+xml,' +
@@ -592,24 +591,14 @@ function initializeForm() {
             return;
         }
 
-        const row =
-            CONTACT_COLUMNS === 'es'
-                ? {
-                      nombre: firstName,
-                      apellido: lastName,
-                      email: email,
-                      telefono: phone,
-                      mensaje: message,
-                      created_at: new Date().toISOString()
-                  }
-                : {
-                      first_name: firstName,
-                      last_name: lastName,
-                      email: email,
-                      phone: phone,
-                      message: message,
-                      created_at: new Date().toISOString()
-                  };
+        const row = {
+            first_name: firstName,
+            last_name: lastName,
+            email: email,
+            phone: phone,
+            message: message,
+            created_at: new Date().toISOString()
+        };
 
         const baseUrl = String(SUPABASE_URL || '').replace(/\/+$/, '');
         const insertUrl = baseUrl + '/rest/v1/' + encodeURIComponent(CONTACT_TABLE);
@@ -639,10 +628,10 @@ function initializeForm() {
             showStatus(statusDiv, '¡Mensaje enviado con éxito! Te responderé pronto.', 'success');
             form.reset();
         } catch (err) {
-            console.error('Supabase contactos:', err);
+            console.error('Supabase contacts:', err);
             showStatus(
                 statusDiv,
-                'No se pudo guardar el mensaje. Revisá la consola (F12), columnas de la tabla y RLS en Supabase.',
+                'No se pudo guardar el mensaje. Revisá la consola (F12) y las políticas RLS de la tabla contacts.',
                 'error'
             );
         } finally {
