@@ -783,28 +783,44 @@ img {
 }
 
 .btn-telegram {
-    background: var(--bg-panel);
-    color: var(--green-bright);
-    border: 1px solid rgba(52, 211, 153, 0.45);
+    background: linear-gradient(165deg, #2aabee 0%, #229ed9 55%, #1d8bc8 100%);
+    color: #ffffff;
+    border: 1px solid rgba(34, 158, 217, 0.95);
+    box-shadow: 0 2px 14px rgba(34, 158, 217, 0.35);
 }
 
 .btn-telegram:hover {
-    background: rgba(52, 211, 153, 0.12);
-    border-color: var(--green-bright);
-    box-shadow: var(--glow-green);
+    background: linear-gradient(165deg, #4db8f0 0%, #229ed9 50%, #1a7fb5 100%);
+    color: #ffffff;
+    border-color: rgba(147, 220, 255, 0.65);
+    box-shadow: 0 4px 22px rgba(34, 158, 217, 0.45);
     transform: translateY(-1px);
 }
 
 .btn-instagram {
-    background: var(--bg-panel);
-    color: var(--red-bright);
-    border: 1px solid rgba(248, 113, 113, 0.45);
+    background: linear-gradient(
+        135deg,
+        #f58529 0%,
+        #dd2a7b 45%,
+        #8134af 88%,
+        #515bd4 100%
+    );
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    box-shadow: 0 2px 16px rgba(225, 48, 108, 0.38);
 }
 
 .btn-instagram:hover {
-    background: rgba(248, 113, 113, 0.1);
-    border-color: var(--red-bright);
-    box-shadow: 0 0 20px rgba(248, 113, 113, 0.2);
+    background: linear-gradient(
+        135deg,
+        #f9a04a 0%,
+        #e6368f 45%,
+        #9545c4 88%,
+        #6b6fe0 100%
+    );
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.42);
+    box-shadow: 0 4px 24px rgba(225, 48, 108, 0.5);
     transform: translateY(-1px);
 }
 

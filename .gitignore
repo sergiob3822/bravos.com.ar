@@ -21,3 +21,5 @@ npm-debug.log*
 # Build
 dist/
 build/
+
+exports/
