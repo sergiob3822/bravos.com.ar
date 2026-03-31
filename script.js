@@ -560,81 +560,96 @@ function renderProjects() {
     initProjectDescriptionToggles(grid);
 }
 
-async function initializeForm() {
+function initializeForm() {
     const form = document.getElementById('contact-form');
     if (!form) return;
 
-    if (!SUPABASE_ANON_KEY || SUPABASE_ANON_KEY === 'TU_SUPABASE_ANON_KEY_AQUI') {
-        return;
-    }
+    form.addEventListener('submit', async function (e) {
+        e.preventDefault();
 
-    try {
-        const { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
-        const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        const submitBtn = form.querySelector('.btn-submit');
+        const statusDiv = document.getElementById('form-status');
 
-        form.addEventListener('submit', async function (e) {
-            e.preventDefault();
+        if (!SUPABASE_ANON_KEY || SUPABASE_ANON_KEY === 'TU_SUPABASE_ANON_KEY_AQUI') {
+            showStatus(
+                statusDiv,
+                'Falta la clave pública de Supabase en index.html (anonKey).',
+                'error'
+            );
+            return;
+        }
 
-            const submitBtn = form.querySelector('.btn-submit');
-            const statusDiv = document.getElementById('form-status');
-            const formData = new FormData(form);
-            const firstName = String(formData.get('firstName') || '').trim();
-            const lastName = String(formData.get('lastName') || '').trim();
-            const email = String(formData.get('email') || '').trim();
-            const phoneRaw = formData.get('phone');
-            const phone = phoneRaw && String(phoneRaw).trim() ? String(phoneRaw).trim() : null;
-            const message = String(formData.get('message') || '').trim();
+        const formData = new FormData(form);
+        const firstName = String(formData.get('firstName') || '').trim();
+        const lastName = String(formData.get('lastName') || '').trim();
+        const email = String(formData.get('email') || '').trim();
+        const phoneRaw = formData.get('phone');
+        const phone = phoneRaw && String(phoneRaw).trim() ? String(phoneRaw).trim() : null;
+        const message = String(formData.get('message') || '').trim();
 
-            if (!firstName || !lastName || !email || !message) {
-                showStatus(statusDiv, 'Por favor, completá todos los campos requeridos.', 'error');
-                return;
+        if (!firstName || !lastName || !email || !message) {
+            showStatus(statusDiv, 'Por favor, completá todos los campos requeridos.', 'error');
+            return;
+        }
+
+        const row =
+            CONTACT_COLUMNS === 'es'
+                ? {
+                      nombre: firstName,
+                      apellido: lastName,
+                      email: email,
+                      telefono: phone,
+                      mensaje: message,
+                      created_at: new Date().toISOString()
+                  }
+                : {
+                      first_name: firstName,
+                      last_name: lastName,
+                      email: email,
+                      phone: phone,
+                      message: message,
+                      created_at: new Date().toISOString()
+                  };
+
+        const baseUrl = String(SUPABASE_URL || '').replace(/\/+$/, '');
+        const insertUrl = baseUrl + '/rest/v1/' + encodeURIComponent(CONTACT_TABLE);
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Enviando...';
+        showStatus(statusDiv, '', 'hidden');
+
+        try {
+            const res = await fetch(insertUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    apikey: SUPABASE_ANON_KEY,
+                    Authorization: 'Bearer ' + SUPABASE_ANON_KEY,
+                    Prefer: 'return=minimal'
+                },
+                body: JSON.stringify([row])
+            });
+
+            if (!res.ok) {
+                const detail = await res.text();
+                console.error('Contacto REST:', res.status, detail);
+                throw new Error(detail || String(res.status));
             }
 
-            const row =
-                CONTACT_COLUMNS === 'es'
-                    ? {
-                          nombre: firstName,
-                          apellido: lastName,
-                          email: email,
-                          telefono: phone,
-                          mensaje: message,
-                          created_at: new Date().toISOString()
-                      }
-                    : {
-                          first_name: firstName,
-                          last_name: lastName,
-                          email: email,
-                          phone: phone,
-                          message: message,
-                          created_at: new Date().toISOString()
-                      };
-
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Enviando...';
-            showStatus(statusDiv, '', 'hidden');
-
-            try {
-                const { error } = await supabase.from(CONTACT_TABLE).insert([row]);
-
-                if (error) throw error;
-
-                showStatus(statusDiv, '¡Mensaje enviado con éxito! Te responderé pronto.', 'success');
-                form.reset();
-            } catch (err) {
-                console.error('Supabase contactos:', err);
-                showStatus(
-                    statusDiv,
-                    'Hubo un error al enviar el mensaje. Por favor, intentá de nuevo.',
-                    'error'
-                );
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Enviar mensaje';
-            }
-        });
-    } catch {
-        return;
-    }
+            showStatus(statusDiv, '¡Mensaje enviado con éxito! Te responderé pronto.', 'success');
+            form.reset();
+        } catch (err) {
+            console.error('Supabase contactos:', err);
+            showStatus(
+                statusDiv,
+                'No se pudo guardar el mensaje. Revisá la consola (F12), columnas de la tabla y RLS en Supabase.',
+                'error'
+            );
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Enviar mensaje';
+        }
+    });
 }
 
 function showStatus(element, message, type) {
@@ -643,8 +658,10 @@ function showStatus(element, message, type) {
     element.className = 'form-status';
     if (type === 'success') {
         element.classList.add('success');
+        element.style.display = 'block';
     } else if (type === 'error') {
         element.classList.add('error');
+        element.style.display = 'block';
     } else if (type === 'hidden') {
         element.style.display = 'none';
     } else {
