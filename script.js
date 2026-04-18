@@ -1,3 +1,10 @@
+/* =============================================================
+ * CodeNTools — bravos.com.ar
+ * Vanilla JS: Supabase REST contact form, galleries, lightbox,
+ * background canvas network, scroll progress, typing rotator,
+ * stats counter, mobile drawer, floating labels, scroll reveal.
+ * ============================================================= */
+
 const SUPABASE_URL =
     (typeof window !== 'undefined' &&
         window.__SUPABASE &&
@@ -15,6 +22,11 @@ const SUPABASE_ANON_KEY =
 
 const CONTACT_TABLE = 'contacts';
 
+const REDUCED_MOTION =
+    typeof window !== 'undefined' &&
+    window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 const DEFAULT_PROJECT_IMAGE =
     'data:image/svg+xml,' +
     encodeURIComponent(
@@ -22,78 +34,43 @@ const DEFAULT_PROJECT_IMAGE =
     );
 
 const TAG_HINTS = {
-    Python:
-        'Lenguaje multiparadigma; muy usado en automatización, datos, APIs y scripting.',
-    'C#':
-        'Lenguaje de Microsoft orientado a objetos para .NET: apps de escritorio, web y servicios.',
-    'C++':
-        'Lenguaje de sistemas y alto rendimiento; usado en motores, sistemas embebidos y software crítico.',
-    JavaScript:
-        'Lenguaje del navegador y de Node.js; impulsa interfaces y backends con un solo ecosistema.',
-    TypeScript:
-        'JavaScript con tipos estáticos; mejora mantenibilidad en proyectos grandes.',
-    'Net 8':
-        'Plataforma actual de .NET para ejecutar apps multiplataforma y APIs de alto rendimiento.',
-    '.NET':
-        'Ecosistema Microsoft (runtime, librerías) para construir apps y servicios en varios lenguajes.',
-    PostgreSQL:
-        'Base de datos relacional open source; soporta SQL avanzado, JSON y alta integridad de datos.',
-    MySQL:
-        'Base de datos relacional muy popular en web; buena para lecturas rápidas y despliegues típicos.',
-    MongoDB:
-        'Base de datos orientada a documentos (NoSQL); flexible para datos semiestructurados.',
-    Docker:
-        'Contenedores para empaquetar y desplegar apps con el mismo entorno en cualquier máquina.',
-    Kubernetes:
-        'Orquestación de contenedores a escala: despliegue, balanceo y recuperación automática.',
-    Django:
-        'Framework web Python “batteries included”: ORM, admin, auth y buenas prácticas integradas.',
-    Flask:
-        'Microframework web en Python; ligero y flexible para APIs y servicios pequeños.',
-    FastAPI:
-        'Framework Python moderno para APIs asíncronas, con validación y documentación automática.',
-    Tkinter:
-        'Toolkit estándar de Python para interfaces gráficas de escritorio multiplataforma.',
-    PyTorch:
-        'Biblioteca de aprendizaje profundo; muy usada en investigación y modelos con tensores.',
-    React:
-        'Biblioteca de Facebook para interfaces declarativas; se basa en componentes y un DOM virtual.',
-    'Vue.js':
-        'Framework progresivo para SPAs; curva de aprendizaje suave y ecosistema maduro.',
-    'Node.js':
-        'Runtime de JavaScript en servidor; ideal para APIs, tiempo real y herramientas JS full-stack.',
-    Redis:
-        'Almacén en memoria; usado como caché, colas y datos de sesión de muy baja latencia.',
-    GraphQL:
-        'Lenguaje de consulta para APIs: el cliente pide exactamente los campos que necesita.',
-    'REST API':
-        'Estilo de API HTTP con recursos y verbos (GET/POST); el estándar más extendido en la web.',
-    Git:
-        'Sistema de control de versiones distribuido; base de flujos de trabajo y colaboración en código.',
-    Linux:
-        'Kernel y entornos tipo Unix; base de servidores, embebidos y mucha infraestructura cloud.',
-    AWS:
-        'Nube de Amazon: cómputo, almacenamiento y servicios gestionados bajo demanda.',
-    Azure:
-        'Nube de Microsoft; integración fuerte con .NET, Active Directory y herramientas empresariales.',
-    Tailwind:
-        'Framework CSS utility-first; estilos rápidos componiendo clases en el HTML.',
-    Supabase:
-        'Backend como servicio: PostgreSQL, auth y APIs auto-generadas al estilo Firebase open source.',
-    Stripe:
-        'Pasarela de pagos online; maneja suscripciones, facturas y cumplimiento PCI.',
-    'Evolution API':
-        'API para integrar WhatsApp en flujos propios; suele usarse con instancias y webhooks.',
-    Chatwoot:
-        'Plataforma open source de atención al cliente y buzón omnicanal (chat, redes, etc.).',
-    Ollama:
-        'Ejecuta modelos de lenguaje localmente; útil para IA privada sin depender solo de la nube.',
-    OCR:
-        'Reconocimiento óptico de caracteres: extrae texto de imágenes o PDFs escaneados.',
-    'ISO 27001':
-        'Norma para implementar un sistema de gestión de seguridad de la información (ISMS).',
-    'ISO 27002':
-        'Catálogo de controles de seguridad (accesos, registro, continuidad, etc.) alineado al 27001.',
+    Python: 'Lenguaje multiparadigma; muy usado en automatización, datos, APIs y scripting.',
+    'C#': 'Lenguaje de Microsoft orientado a objetos para .NET: apps de escritorio, web y servicios.',
+    'C++': 'Lenguaje de sistemas y alto rendimiento; usado en motores, sistemas embebidos y software crítico.',
+    JavaScript: 'Lenguaje del navegador y de Node.js; impulsa interfaces y backends con un solo ecosistema.',
+    TypeScript: 'JavaScript con tipos estáticos; mejora mantenibilidad en proyectos grandes.',
+    'Net 8': 'Plataforma actual de .NET para ejecutar apps multiplataforma y APIs de alto rendimiento.',
+    'Net 10': 'Versión moderna de .NET con mejoras de rendimiento, AOT y soporte multiplataforma.',
+    '.NET': 'Ecosistema Microsoft (runtime, librerías) para construir apps y servicios en varios lenguajes.',
+    PostgreSQL: 'Base de datos relacional open source; soporta SQL avanzado, JSON y alta integridad de datos.',
+    MySQL: 'Base de datos relacional muy popular en web; buena para lecturas rápidas y despliegues típicos.',
+    MongoDB: 'Base de datos orientada a documentos (NoSQL); flexible para datos semiestructurados.',
+    Docker: 'Contenedores para empaquetar y desplegar apps con el mismo entorno en cualquier máquina.',
+    Kubernetes: 'Orquestación de contenedores a escala: despliegue, balanceo y recuperación automática.',
+    Django: 'Framework web Python “batteries included”: ORM, admin, auth y buenas prácticas integradas.',
+    Flask: 'Microframework web en Python; ligero y flexible para APIs y servicios pequeños.',
+    FastAPI: 'Framework Python moderno para APIs asíncronas, con validación y documentación automática.',
+    Tkinter: 'Toolkit estándar de Python para interfaces gráficas de escritorio multiplataforma.',
+    PyTorch: 'Biblioteca de aprendizaje profundo; muy usada en investigación y modelos con tensores.',
+    React: 'Biblioteca de Facebook para interfaces declarativas; se basa en componentes y un DOM virtual.',
+    'Vue.js': 'Framework progresivo para SPAs; curva de aprendizaje suave y ecosistema maduro.',
+    'Node.js': 'Runtime de JavaScript en servidor; ideal para APIs, tiempo real y herramientas JS full-stack.',
+    Redis: 'Almacén en memoria; usado como caché, colas y datos de sesión de muy baja latencia.',
+    GraphQL: 'Lenguaje de consulta para APIs: el cliente pide exactamente los campos que necesita.',
+    'REST API': 'Estilo de API HTTP con recursos y verbos (GET/POST); el estándar más extendido en la web.',
+    Git: 'Sistema de control de versiones distribuido; base de flujos de trabajo y colaboración en código.',
+    Linux: 'Kernel y entornos tipo Unix; base de servidores, embebidos y mucha infraestructura cloud.',
+    AWS: 'Nube de Amazon: cómputo, almacenamiento y servicios gestionados bajo demanda.',
+    Azure: 'Nube de Microsoft; integración fuerte con .NET, Active Directory y herramientas empresariales.',
+    Tailwind: 'Framework CSS utility-first; estilos rápidos componiendo clases en el HTML.',
+    Supabase: 'Backend como servicio: PostgreSQL, auth y APIs auto-generadas al estilo Firebase open source.',
+    Stripe: 'Pasarela de pagos online; maneja suscripciones, facturas y cumplimiento PCI.',
+    'Evolution API': 'API para integrar WhatsApp en flujos propios; suele usarse con instancias y webhooks.',
+    Chatwoot: 'Plataforma open source de atención al cliente y buzón omnicanal (chat, redes, etc.).',
+    Ollama: 'Ejecuta modelos de lenguaje localmente; útil para IA privada sin depender solo de la nube.',
+    OCR: 'Reconocimiento óptico de caracteres: extrae texto de imágenes o PDFs escaneados.',
+    'ISO 27001': 'Norma para implementar un sistema de gestión de seguridad de la información (ISMS).',
+    'ISO 27002': 'Catálogo de controles de seguridad (accesos, registro, continuidad, etc.) alineado al 27001.',
     Meta: 'APIs y productos de Meta: integración con WhatsApp Business, anuncios y mensajería.',
     Twilio: 'Plataforma en la nube para SMS, voz, video y WhatsApp mediante APIs.',
     SQL: 'Lenguaje declarativo para consultar y gestionar datos en bases relacionales.',
@@ -156,7 +133,6 @@ const projects = [
             'https://dzxfguflubuzwwrurouh.supabase.co/storage/v1/object/public/project-images/Trading_Bot/cnf-backtest.png',
             'https://dzxfguflubuzwwrurouh.supabase.co/storage/v1/object/public/project-images/Trading_Bot/cnf-config.png'
         ],
-
         tags: ['C#', 'Net 10', 'PostgreSQL', 'Python'],
         link: 'https://github.com/sergiob3822/bravos.com.ar'
     }
@@ -334,12 +310,7 @@ function initProjectGalleries() {
     });
 }
 
-const lightboxState = {
-    projectIndex: 0,
-    imageIndex: 0,
-    urls: []
-};
-
+const lightboxState = { projectIndex: 0, imageIndex: 0, urls: [] };
 let lightboxReturnFocus = null;
 
 function getLightboxElements() {
@@ -427,10 +398,7 @@ function closeProjectLightbox() {
     const ref = lightboxReturnFocus;
     lightboxReturnFocus = null;
     if (ref && typeof ref.focus === 'function') {
-        try {
-            ref.focus();
-        } catch {
-        }
+        try { ref.focus(); } catch {}
     }
 }
 
@@ -447,36 +415,22 @@ function initProjectLightbox() {
         if (Number.isNaN(idx)) return;
         openProjectLightbox(idx);
     });
-    el.backdrop.addEventListener('click', function () {
-        closeProjectLightbox();
-    });
-    el.closeBtn.addEventListener('click', function () {
-        closeProjectLightbox();
-    });
-    el.prev.addEventListener('click', function () {
-        lightboxStep(-1);
-    });
-    el.next.addEventListener('click', function () {
-        lightboxStep(1);
-    });
+    el.backdrop.addEventListener('click', closeProjectLightbox);
+    el.closeBtn.addEventListener('click', closeProjectLightbox);
+    el.prev.addEventListener('click', function () { lightboxStep(-1); });
+    el.next.addEventListener('click', function () { lightboxStep(1); });
     document.addEventListener('keydown', function (e) {
         const root = document.getElementById('project-lightbox');
         if (!root || root.hidden) return;
-        if (e.key === 'Escape') {
-            e.preventDefault();
-            closeProjectLightbox();
-        } else if (e.key === 'ArrowLeft') {
-            e.preventDefault();
-            lightboxStep(-1);
-        } else if (e.key === 'ArrowRight') {
-            e.preventDefault();
-            lightboxStep(1);
-        }
+        if (e.key === 'Escape') { e.preventDefault(); closeProjectLightbox(); }
+        else if (e.key === 'ArrowLeft') { e.preventDefault(); lightboxStep(-1); }
+        else if (e.key === 'ArrowRight') { e.preventDefault(); lightboxStep(1); }
     });
 }
 
+/* ========== SCROLL REVEAL ========== */
 function bindScrollReveal() {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (REDUCED_MOTION) {
         document.querySelectorAll('.reveal').forEach(function (el) {
             el.classList.remove('reveal--suppress');
             el.classList.add('is-visible');
@@ -490,16 +444,10 @@ function bindScrollReveal() {
                     if (entry.isIntersecting) {
                         entry.target.classList.remove('reveal--suppress');
                         entry.target.classList.add('is-visible');
-                    } else {
-                        entry.target.classList.add('reveal--suppress');
-                        entry.target.classList.remove('is-visible');
-                        requestAnimationFrame(function () {
-                            entry.target.classList.remove('reveal--suppress');
-                        });
                     }
                 });
             },
-            { rootMargin: '0px', threshold: 0.05 }
+            { rootMargin: '0px 0px -8% 0px', threshold: 0.05 }
         );
     }
     document.querySelectorAll('.reveal').forEach(function (el) {
@@ -507,6 +455,325 @@ function bindScrollReveal() {
     });
 }
 
+/* ========== HEADER SCROLLED ========== */
+function initHeaderScrolled() {
+    const header = document.getElementById('site-header');
+    if (!header) return;
+    const handle = function () {
+        if (window.scrollY > 8) header.classList.add('is-scrolled');
+        else header.classList.remove('is-scrolled');
+    };
+    handle();
+    window.addEventListener('scroll', handle, { passive: true });
+}
+
+/* ========== SCROLL PROGRESS ========== */
+function initScrollProgress() {
+    const bar = document.getElementById('scroll-progress-bar');
+    if (!bar) return;
+    let ticking = false;
+    const update = function () {
+        const h = document.documentElement;
+        const scrolled = h.scrollTop || document.body.scrollTop;
+        const max = (h.scrollHeight - h.clientHeight) || 1;
+        const pct = Math.min(100, Math.max(0, (scrolled / max) * 100));
+        bar.style.width = pct + '%';
+        ticking = false;
+    };
+    update();
+    window.addEventListener(
+        'scroll',
+        function () {
+            if (!ticking) {
+                ticking = true;
+                requestAnimationFrame(update);
+            }
+        },
+        { passive: true }
+    );
+    window.addEventListener('resize', update);
+}
+
+/* ========== TYPING ROTATOR ========== */
+function initTypingRotator() {
+    const target = document.getElementById('typing-target');
+    if (!target) return;
+    const phrases = [
+        'dotnet run --project crm',
+        'python automate.py --bot whatsapp',
+        'docker compose up -d',
+        'audit --iso 27001 --scope core',
+        'train --strategy SMC --epochs 50'
+    ];
+    if (REDUCED_MOTION) {
+        target.textContent = phrases[0];
+        return;
+    }
+    let pi = 0, ci = 0, deleting = false;
+    function tick() {
+        const phrase = phrases[pi];
+        if (!deleting) {
+            ci++;
+            target.textContent = phrase.slice(0, ci);
+            if (ci >= phrase.length) {
+                deleting = true;
+                setTimeout(tick, 1700);
+                return;
+            }
+            setTimeout(tick, 55 + Math.random() * 40);
+        } else {
+            ci--;
+            target.textContent = phrase.slice(0, ci);
+            if (ci <= 0) {
+                deleting = false;
+                pi = (pi + 1) % phrases.length;
+                setTimeout(tick, 250);
+                return;
+            }
+            setTimeout(tick, 30);
+        }
+    }
+    setTimeout(tick, 600);
+}
+
+/* ========== STATS COUNTER ========== */
+function initStatsCounter() {
+    const nodes = document.querySelectorAll('[data-counter]');
+    if (!nodes.length) return;
+    if (REDUCED_MOTION) {
+        nodes.forEach(function (el) {
+            const target = parseFloat(el.dataset.counter);
+            const suffix = el.dataset.suffix || '';
+            el.textContent = String(target) + suffix;
+        });
+        return;
+    }
+    const animate = function (el) {
+        const target = parseFloat(el.dataset.counter);
+        const suffix = el.dataset.suffix || '';
+        const duration = 1400;
+        const start = performance.now();
+        function step(now) {
+            const t = Math.min(1, (now - start) / duration);
+            const eased = 1 - Math.pow(1 - t, 3);
+            const value = Math.round(target * eased);
+            el.textContent = value + suffix;
+            if (t < 1) requestAnimationFrame(step);
+            else el.textContent = target + suffix;
+        }
+        requestAnimationFrame(step);
+    };
+    const io = new IntersectionObserver(
+        function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting && !entry.target.dataset.counted) {
+                    entry.target.dataset.counted = '1';
+                    animate(entry.target);
+                }
+            });
+        },
+        { threshold: 0.4 }
+    );
+    nodes.forEach(function (n) { io.observe(n); });
+}
+
+/* ========== MOBILE DRAWER ========== */
+function initMobileMenu() {
+    const toggle = document.getElementById('nav-toggle');
+    const drawer = document.getElementById('mobile-drawer');
+    if (!toggle || !drawer) return;
+
+    const open = function () {
+        drawer.hidden = false;
+        drawer.setAttribute('aria-hidden', 'false');
+        requestAnimationFrame(function () { drawer.classList.add('is-open'); });
+        toggle.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+        const firstLink = drawer.querySelector('a, button');
+        if (firstLink) setTimeout(function () { firstLink.focus(); }, 250);
+    };
+    const close = function () {
+        drawer.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+        setTimeout(function () {
+            drawer.hidden = true;
+            drawer.setAttribute('aria-hidden', 'true');
+        }, 350);
+        toggle.focus();
+    };
+
+    toggle.addEventListener('click', function () {
+        if (drawer.classList.contains('is-open')) close();
+        else open();
+    });
+    drawer.addEventListener('click', function (e) {
+        if (e.target.matches('[data-drawer-close]') || e.target.closest('[data-drawer-close]')) {
+            close();
+        }
+    });
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && drawer.classList.contains('is-open')) close();
+    });
+    window.addEventListener('resize', function () {
+        if (window.innerWidth > 900 && drawer.classList.contains('is-open')) close();
+    });
+}
+
+/* ========== FLOATING LABELS COUNTER ========== */
+function initFormCounter() {
+    const ta = document.getElementById('message');
+    const counter = document.getElementById('message-counter');
+    if (!ta || !counter) return;
+    const update = function () {
+        counter.textContent = (ta.value.length || 0) + ' / ' + (ta.maxLength || 8000);
+    };
+    ta.addEventListener('input', update);
+    update();
+}
+
+/* ========== BACKGROUND CANVAS NETWORK ========== */
+function initBgNetwork() {
+    const canvas = document.getElementById('bg-network');
+    if (!canvas || REDUCED_MOTION) {
+        if (canvas) canvas.style.display = 'none';
+        return;
+    }
+    const ctx = canvas.getContext('2d', { alpha: true });
+    if (!ctx) return;
+
+    let dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let w = 0, h = 0;
+    let nodes = [];
+    let mouse = { x: -9999, y: -9999, active: false };
+    let rafId = 0;
+    let running = true;
+
+    const isMobile = window.innerWidth < 768;
+    const NODE_COUNT = isMobile ? 28 : 52;
+    const MAX_DIST = isMobile ? 130 : 170;
+
+    function resize() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        w = window.innerWidth;
+        h = window.innerHeight;
+        canvas.width = Math.floor(w * dpr);
+        canvas.height = Math.floor(h * dpr);
+        canvas.style.width = w + 'px';
+        canvas.style.height = h + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function makeNodes() {
+        nodes = [];
+        for (let i = 0; i < NODE_COUNT; i++) {
+            nodes.push({
+                x: Math.random() * w,
+                y: Math.random() * h,
+                vx: (Math.random() - 0.5) * 0.35,
+                vy: (Math.random() - 0.5) * 0.35,
+                r: 1 + Math.random() * 1.4
+            });
+        }
+    }
+
+    function step() {
+        if (!running) return;
+        ctx.clearRect(0, 0, w, h);
+
+        for (let i = 0; i < nodes.length; i++) {
+            const n = nodes[i];
+            n.x += n.vx;
+            n.y += n.vy;
+            if (n.x < -10) n.x = w + 10;
+            if (n.x > w + 10) n.x = -10;
+            if (n.y < -10) n.y = h + 10;
+            if (n.y > h + 10) n.y = -10;
+
+            if (mouse.active) {
+                const dx = n.x - mouse.x;
+                const dy = n.y - mouse.y;
+                const d2 = dx * dx + dy * dy;
+                if (d2 < 16000) {
+                    const f = (1 - d2 / 16000) * 0.04;
+                    n.x += dx * f;
+                    n.y += dy * f;
+                }
+            }
+        }
+
+        for (let i = 0; i < nodes.length; i++) {
+            const a = nodes[i];
+            for (let j = i + 1; j < nodes.length; j++) {
+                const b = nodes[j];
+                const dx = a.x - b.x;
+                const dy = a.y - b.y;
+                const d = Math.sqrt(dx * dx + dy * dy);
+                if (d < MAX_DIST) {
+                    const alpha = (1 - d / MAX_DIST) * 0.35;
+                    ctx.strokeStyle = 'rgba(52, 211, 153,' + alpha.toFixed(3) + ')';
+                    ctx.lineWidth = 0.6;
+                    ctx.beginPath();
+                    ctx.moveTo(a.x, a.y);
+                    ctx.lineTo(b.x, b.y);
+                    ctx.stroke();
+                }
+            }
+        }
+
+        for (let i = 0; i < nodes.length; i++) {
+            const n = nodes[i];
+            ctx.fillStyle = 'rgba(110, 231, 183, 0.85)';
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        rafId = requestAnimationFrame(step);
+    }
+
+    function start() {
+        if (running) return;
+        running = true;
+        step();
+    }
+    function stop() {
+        running = false;
+        cancelAnimationFrame(rafId);
+    }
+
+    resize();
+    makeNodes();
+    step();
+
+    let resizeT;
+    window.addEventListener('resize', function () {
+        clearTimeout(resizeT);
+        resizeT = setTimeout(function () {
+            resize();
+            makeNodes();
+        }, 150);
+    });
+
+    window.addEventListener(
+        'pointermove',
+        function (e) {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+            mouse.active = true;
+        },
+        { passive: true }
+    );
+    window.addEventListener('pointerleave', function () { mouse.active = false; });
+    window.addEventListener('blur', function () { mouse.active = false; });
+
+    document.addEventListener('visibilitychange', function () {
+        if (document.hidden) stop();
+        else start();
+    });
+}
+
+/* ========== INIT ========== */
 document.addEventListener('DOMContentLoaded', function () {
     bindScrollReveal();
     initProjectDescriptionUI();
@@ -515,6 +782,13 @@ document.addEventListener('DOMContentLoaded', function () {
     initProjectGalleries();
     initProjectLightbox();
     initializeForm();
+    initHeaderScrolled();
+    initScrollProgress();
+    initTypingRotator();
+    initStatsCounter();
+    initMobileMenu();
+    initFormCounter();
+    initBgNetwork();
 });
 
 function renderProjects() {
@@ -567,6 +841,7 @@ function initializeForm() {
         e.preventDefault();
 
         const submitBtn = form.querySelector('.btn-submit');
+        const btnLabel = submitBtn ? submitBtn.querySelector('span') : null;
         const statusDiv = document.getElementById('form-status');
 
         if (!SUPABASE_ANON_KEY || SUPABASE_ANON_KEY === 'TU_SUPABASE_ANON_KEY_AQUI') {
@@ -604,7 +879,7 @@ function initializeForm() {
         const insertUrl = baseUrl + '/rest/v1/' + encodeURIComponent(CONTACT_TABLE);
 
         submitBtn.disabled = true;
-        submitBtn.textContent = 'Enviando...';
+        if (btnLabel) btnLabel.textContent = 'Enviando...';
         showStatus(statusDiv, '', 'hidden');
 
         try {
@@ -627,6 +902,8 @@ function initializeForm() {
 
             showStatus(statusDiv, '¡Mensaje enviado con éxito! Te responderé pronto.', 'success');
             form.reset();
+            const counter = document.getElementById('message-counter');
+            if (counter) counter.textContent = '0 / 8000';
         } catch (err) {
             console.error('Supabase contacts:', err);
             showStatus(
@@ -636,7 +913,7 @@ function initializeForm() {
             );
         } finally {
             submitBtn.disabled = false;
-            submitBtn.textContent = 'Enviar mensaje';
+            if (btnLabel) btnLabel.textContent = 'Enviar mensaje';
         }
     });
 }
@@ -658,21 +935,14 @@ function showStatus(element, message, type) {
     }
 }
 
+/* Smooth-scroll para links internos (header offset ya gestionado por scroll-padding-top) */
 document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener('click', function (e) {
-        e.preventDefault();
         const href = this.getAttribute('href');
-
-        if (href === '#') {
-            window.scrollTo(0, 0);
-        } else {
-            const target = document.querySelector(href);
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'auto',
-                    block: 'start'
-                });
-            }
-        }
+        if (!href || href === '#') return;
+        const target = document.querySelector(href);
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior: REDUCED_MOTION ? 'auto' : 'smooth', block: 'start' });
     });
 });

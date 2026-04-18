@@ -3,47 +3,198 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="CodeNTools: desarrollo en C# y Python, automatización, CRM, bots y auditorías de ciberseguridad alineadas a ISO/IEC 27001 y 27002.">
-    <meta name="theme-color" content="#0a0e0c">
+    <meta name="description" content="CodeNTools — Sergio Bravo: desarrollo en C# y Python, automatización, CRM, bots de trading e IA, y auditorías de ciberseguridad alineadas a ISO/IEC 27001 y 27002.">
+    <meta name="theme-color" content="#060a08">
     <meta name="color-scheme" content="dark">
-    <title>CodeNTools | Portafolio</title>
+    <title>CodeNTools | Sergio Bravo · Software & Ciberseguridad</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <header class="header">
-        <div class="container">
+    <div class="scroll-progress" aria-hidden="true">
+        <div class="scroll-progress-bar" id="scroll-progress-bar"></div>
+    </div>
+
+    <canvas id="bg-network" class="bg-network" aria-hidden="true"></canvas>
+
+    <a href="#inicio" class="skip-link">Saltar al contenido</a>
+
+    <header class="header" id="site-header">
+        <div class="container header-inner">
             <div class="logo">
-                <a href="#" class="logo-link">Code N Tools</a>
+                <a href="#inicio" class="logo-link" aria-label="Code N Tools — Inicio">
+                    <span class="logo-bracket" aria-hidden="true">[</span>
+                    <span class="logo-text">Code<span class="logo-sep">N</span>Tools</span>
+                    <span class="logo-bracket" aria-hidden="true">]</span>
+                    <span class="logo-status" aria-label="Estado: en línea">
+                        <span class="status-dot"></span>
+                        <span class="status-label">ONLINE</span>
+                    </span>
+                </a>
             </div>
-            <nav class="nav">
-                <a href="#inicio">Inicio</a>
-                <a href="#sobre-mi">Sobre Mí</a>
-                <a href="#proyectos">Proyectos</a>
-                <a href="#contacto">Contacto</a>
+
+            <nav class="nav nav--desktop" aria-label="Navegación principal">
+                <a href="#inicio" class="nav-link"><span class="nav-link-num">01</span>Inicio</a>
+                <a href="#sobre-mi" class="nav-link"><span class="nav-link-num">02</span>Sobre Mí</a>
+                <a href="#stack" class="nav-link"><span class="nav-link-num">03</span>Stack</a>
+                <a href="#proyectos" class="nav-link"><span class="nav-link-num">04</span>Proyectos</a>
+                <a href="#certificaciones" class="nav-link"><span class="nav-link-num">05</span>Certificaciones</a>
+                <a href="#contacto" class="nav-link"><span class="nav-link-num">06</span>Contacto</a>
+                <a href="/policies-and-privacy" class="nav-cta">
+                    <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                    <span>Políticas y Privacidad</span>
+                </a>
             </nav>
+
+            <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-drawer">
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+            </button>
         </div>
     </header>
 
+    <div class="mobile-drawer" id="mobile-drawer" hidden aria-hidden="true">
+        <div class="mobile-drawer-backdrop" data-drawer-close></div>
+        <nav class="mobile-drawer-panel" aria-label="Navegación móvil">
+            <div class="mobile-drawer-head">
+                <span class="mobile-drawer-label">// MENÚ</span>
+                <button type="button" class="mobile-drawer-close" data-drawer-close aria-label="Cerrar menú">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+            <ul class="mobile-drawer-list">
+                <li style="--i:0"><a href="#inicio" data-drawer-close><span class="num">01</span>Inicio</a></li>
+                <li style="--i:1"><a href="#sobre-mi" data-drawer-close><span class="num">02</span>Sobre Mí</a></li>
+                <li style="--i:2"><a href="#stack" data-drawer-close><span class="num">03</span>Stack</a></li>
+                <li style="--i:3"><a href="#proyectos" data-drawer-close><span class="num">04</span>Proyectos</a></li>
+                <li style="--i:4"><a href="#certificaciones" data-drawer-close><span class="num">05</span>Certificaciones</a></li>
+                <li style="--i:5"><a href="#servicios" data-drawer-close><span class="num">06</span>Servicios</a></li>
+                <li style="--i:6"><a href="#contacto" data-drawer-close><span class="num">07</span>Contacto</a></li>
+                <li style="--i:7"><a href="/policies-and-privacy" class="is-cta"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Políticas y Privacidad</a></li>
+            </ul>
+            <div class="mobile-drawer-foot">
+                <a href="https://t.me/codentools_bot" target="_blank" rel="noopener" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://www.instagram.com/codentools" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=61570754819991&locale=es_LA" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+            </div>
+        </nav>
+    </div>
+
     <main>
-        <section id="inicio" class="hero reveal">
-            <div class="container">
-                <h2 class="hero-title">
-                    <span class="hero-title-main">Desarrollo de aplicaciones y automatización</span>
-                    <span class="hero-title-stack">C# | Py</span>
-                </h2>
-                <p>Construyo software orientado a procesos: integraciones, bots y sistemas de negocio con foco en fiabilidad y mantenibilidad. Trabajo principalmente en <strong>C#</strong> y <strong>Python</strong>, desde interfaces de escritorio y servicios hasta pipelines de datos y automatización de mensajería.</p>
-                <p>Entre mis proyectos actuales y en curso: un <strong>CRM</strong> para gestión de call centers y negocios con múltiples dispositivos móviles; un <strong>bot de trading</strong> con múltiples estrategias (EMA, Smart Money Concepts, retrocesos de Fibonacci y otras reglas combinables); un <strong>bot de Telegram con IA</strong> como asistente personal; en roadmap, automatización de <strong>WhatsApp</strong> con registro de eventos para logística y un <strong>panel de gestión logística</strong>.</p>
+        <!-- =========================== HERO =========================== -->
+        <section id="inicio" class="hero">
+            <div class="container hero-container">
+                <div class="hero-badge reveal">
+                    <span class="hero-badge-dot"></span>
+                    <span>DISPONIBLE PARA NUEVOS PROYECTOS</span>
+                </div>
+
+                <h1 class="hero-title reveal" style="--reveal-delay:80ms">
+                    <span class="hero-title-pre">// build &amp; secure</span>
+                    <span class="hero-title-main">Software a medida y <span class="grad-text">automatización</span> con criterio de ingeniería.</span>
+                    <span class="hero-title-stack">
+                        <span class="typing-prefix">$&nbsp;</span><span class="typing-target" id="typing-target" aria-live="polite"></span><span class="typing-caret" aria-hidden="true">▍</span>
+                    </span>
+                </h1>
+
+                <p class="hero-lead reveal" style="--reveal-delay:160ms">
+                    Construyo soluciones orientadas a procesos: integraciones, bots, CRMs y pipelines de datos en <strong>C#</strong> y <strong>Python</strong>, con foco en <strong>fiabilidad</strong>, <strong>mantenibilidad</strong> y <strong>seguridad</strong> alineada a ISO/IEC 27001 y 27002.
+                </p>
+
+                <div class="hero-ctas reveal" style="--reveal-delay:220ms">
+                    <a href="#proyectos" class="btn btn--primary">
+                        <span>Ver proyectos</span>
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                    <a href="#contacto" class="btn btn--ghost">
+                        <span>Iniciar conversación</span>
+                        <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+                <ul class="hero-chips reveal" style="--reveal-delay:280ms" aria-label="Stack principal">
+                    <li><i class="fa-brands fa-python" aria-hidden="true"></i> Python</li>
+                    <li><i class="fa-solid fa-code" aria-hidden="true"></i> C# / .NET 8</li>
+                    <li><i class="fa-solid fa-database" aria-hidden="true"></i> PostgreSQL</li>
+                    <li><i class="fa-brands fa-docker" aria-hidden="true"></i> Docker</li>
+                    <li><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> ISO/IEC 27001</li>
+                </ul>
+
+                <div class="hero-scrollhint reveal" style="--reveal-delay:340ms" aria-hidden="true">
+                    <span class="hero-scrollhint-line"></span>
+                    <span class="hero-scrollhint-text">SCROLL</span>
+                </div>
             </div>
         </section>
 
+        <!-- =========================== STATS =========================== -->
+        <section id="stats" class="stats reveal" aria-label="Indicadores">
+            <div class="container">
+                <ul class="stats-grid">
+                    <li class="stat-card">
+                        <span class="stat-num" data-counter="14" data-suffix="+">0</span>
+                        <span class="stat-label">Años con tecnología</span>
+                    </li>
+                    <li class="stat-card">
+                        <span class="stat-num" data-counter="4" data-suffix="">0</span>
+                        <span class="stat-label">Certificaciones freeCodeCamp</span>
+                    </li>
+                    <li class="stat-card">
+                        <span class="stat-num" data-counter="3" data-suffix="">0</span>
+                        <span class="stat-label">Certificaciones de ciberseguridad</span>
+                    </li>
+                    <li class="stat-card">
+                        <span class="stat-num" data-counter="100" data-suffix="%">0</span>
+                        <span class="stat-label">Código propio &amp; auditado</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- =========================== SOBRE MÍ =========================== -->
         <section id="sobre-mi" class="about reveal">
             <div class="container">
-                <h2 class="section-title">Sobre Mí</h2>
+                <header class="section-head">
+                    <span class="section-eyebrow">// 02 — Quién soy</span>
+                    <h2 class="section-title">Sobre Mí</h2>
+                    <p class="section-sub">Sergio Bravo — Entre Ríos, Argentina. Ingeniería de software con base en seguridad ofensiva/defensiva y fundamentos en computación científica.</p>
+                </header>
+
                 <div class="about-content">
+                    <aside class="about-card">
+                        <div class="about-avatar">
+                            <img src="https://dzxfguflubuzwwrurouh.supabase.co/storage/v1/object/public/profile-images/CodeNTools%20(logo-NB).png"
+                                 alt="CodeNTools"
+                                 class="avatar-image"
+                                 width="200"
+                                 height="200"
+                                 loading="lazy"
+                                 decoding="async">
+                            <span class="avatar-corner avatar-corner--tl" aria-hidden="true"></span>
+                            <span class="avatar-corner avatar-corner--tr" aria-hidden="true"></span>
+                            <span class="avatar-corner avatar-corner--bl" aria-hidden="true"></span>
+                            <span class="avatar-corner avatar-corner--br" aria-hidden="true"></span>
+                        </div>
+                        <div class="about-card-body">
+                            <h3 class="about-card-name">Sergio Bravo</h3>
+                            <p class="about-card-role">Software Engineer · Cybersecurity</p>
+                            <ul class="about-card-meta">
+                                <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Entre Ríos, Argentina</li>
+                                <li><i class="fa-solid fa-envelope" aria-hidden="true"></i> admin@bravos.com.ar</li>
+                                <li><span class="status-dot status-dot--inline"></span> Disponible</li>
+                            </ul>
+                            <div class="about-card-socials">
+                                <a href="https://t.me/codentools_bot" target="_blank" rel="noopener" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                                <a href="https://www.instagram.com/codentools" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                                <a href="https://www.facebook.com/profile.php?id=61570754819991&locale=es_LA" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                            </div>
+                        </div>
+                    </aside>
+
                     <div class="about-text">
                         <div class="about-personal">
                             <p>Me llamo <strong>Sergio</strong>. Desde chico me interesó entender cómo funcionan los sistemas y los dispositivos: no solo usarlos, sino qué ocurre por debajo (hardware, red, permisos y políticas de seguridad).</p>
@@ -60,35 +211,291 @@
                             <p>Si necesitás detalle de stack (versiones, entornos, CI/CD o hardening), lo vemos en <a href="#contacto">contacto</a>.</p>
                         </div>
                     </div>
-                    <div class="about-image">
-                        <img src="https://dzxfguflubuzwwrurouh.supabase.co/storage/v1/object/public/profile-images/CodeNTools%20(logo-NB).png"
-                             alt="CodeNTools"
-                             class="avatar-image"
-                             width="200"
-                             height="200"
-                             loading="lazy"
-                             decoding="async">
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================== STACK =========================== -->
+        <section id="stack" class="stack reveal">
+            <div class="container">
+                <header class="section-head">
+                    <span class="section-eyebrow">// 03 — Tecnologías</span>
+                    <h2 class="section-title">Stack &amp; herramientas</h2>
+                    <p class="section-sub">Lenguajes, frameworks e infraestructura con los que trabajo a diario.</p>
+                </header>
+
+                <div class="stack-grid">
+                    <div class="stack-cat">
+                        <h3 class="stack-cat-title"><i class="fa-solid fa-code"></i> Lenguajes</h3>
+                        <ul class="stack-list">
+                            <li class="stack-item" data-tech="Python"><i class="fa-brands fa-python"></i><span>Python</span></li>
+                            <li class="stack-item" data-tech="C#"><i class="fa-solid fa-hashtag"></i><span>C#</span></li>
+                            <li class="stack-item" data-tech="JavaScript"><i class="fa-brands fa-js"></i><span>JavaScript</span></li>
+                            <li class="stack-item" data-tech="SQL"><i class="fa-solid fa-database"></i><span>SQL</span></li>
+                            <li class="stack-item" data-tech="HTML"><i class="fa-brands fa-html5"></i><span>HTML</span></li>
+                            <li class="stack-item" data-tech="CSS"><i class="fa-brands fa-css3-alt"></i><span>CSS</span></li>
+                        </ul>
+                    </div>
+                    <div class="stack-cat">
+                        <h3 class="stack-cat-title"><i class="fa-solid fa-layer-group"></i> Frameworks</h3>
+                        <ul class="stack-list">
+                            <li class="stack-item" data-tech=".NET"><i class="fa-solid fa-cubes"></i><span>.NET 8</span></li>
+                            <li class="stack-item" data-tech="Django"><i class="fa-solid fa-server"></i><span>Django</span></li>
+                            <li class="stack-item" data-tech="Flask"><i class="fa-solid fa-flask"></i><span>Flask</span></li>
+                            <li class="stack-item" data-tech="PyTorch"><i class="fa-solid fa-brain"></i><span>PyTorch</span></li>
+                            <li class="stack-item" data-tech="Tkinter"><i class="fa-solid fa-window-restore"></i><span>Tkinter</span></li>
+                        </ul>
+                    </div>
+                    <div class="stack-cat">
+                        <h3 class="stack-cat-title"><i class="fa-solid fa-cloud"></i> Infraestructura</h3>
+                        <ul class="stack-list">
+                            <li class="stack-item" data-tech="Docker"><i class="fa-brands fa-docker"></i><span>Docker</span></li>
+                            <li class="stack-item" data-tech="PostgreSQL"><i class="fa-solid fa-database"></i><span>PostgreSQL</span></li>
+                            <li class="stack-item" data-tech="Supabase"><i class="fa-solid fa-bolt"></i><span>Supabase</span></li>
+                            <li class="stack-item" data-tech="Linux"><i class="fa-brands fa-linux"></i><span>Linux</span></li>
+                            <li class="stack-item" data-tech="Git"><i class="fa-brands fa-git-alt"></i><span>Git</span></li>
+                        </ul>
+                    </div>
+                    <div class="stack-cat">
+                        <h3 class="stack-cat-title"><i class="fa-solid fa-shield-halved"></i> Seguridad &amp; Ops</h3>
+                        <ul class="stack-list">
+                            <li class="stack-item" data-tech="ISO 27001"><i class="fa-solid fa-clipboard-check"></i><span>ISO 27001</span></li>
+                            <li class="stack-item" data-tech="ISO 27002"><i class="fa-solid fa-list-check"></i><span>ISO 27002</span></li>
+                            <li class="stack-item" data-tech="Evolution API"><i class="fa-brands fa-whatsapp"></i><span>Evolution API</span></li>
+                            <li class="stack-item" data-tech="Chatwoot"><i class="fa-solid fa-comments"></i><span>Chatwoot</span></li>
+                            <li class="stack-item" data-tech="Ollama"><i class="fa-solid fa-robot"></i><span>Ollama</span></li>
+                            <li class="stack-item" data-tech="OCR"><i class="fa-solid fa-eye"></i><span>OCR</span></li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="proyectos" class="projects">
+        <!-- =========================== PROYECTOS =========================== -->
+        <section id="proyectos" class="projects reveal">
             <div class="container">
-                <h2 class="section-title reveal">Mis Proyectos</h2>
-                <div class="projects-grid" id="projects-grid">
+                <header class="section-head">
+                    <span class="section-eyebrow">// 04 — Selección</span>
+                    <h2 class="section-title">Proyectos destacados</h2>
+                    <p class="section-sub">Una muestra de productos en producción y en desarrollo. Hacé click en cualquier imagen para ver la galería completa.</p>
+                </header>
+                <div class="projects-grid" id="projects-grid"></div>
+            </div>
+        </section>
+
+        <!-- =========================== CERTIFICACIONES =========================== -->
+        <section id="certificaciones" class="certs reveal">
+            <div class="container">
+                <header class="section-head">
+                    <span class="section-eyebrow">// 05 — Credenciales</span>
+                    <h2 class="section-title">Certificaciones</h2>
+                    <p class="section-sub">Formación verificable en desarrollo, ciencia de datos y ciberseguridad.</p>
+                </header>
+                <div class="certs-grid">
+                    <article class="cert-card">
+                        <div class="cert-icon"><i class="fa-brands fa-google"></i></div>
+                        <div class="cert-body">
+                            <span class="cert-issuer">Google · Coursera</span>
+                            <h3 class="cert-title">Cybersecurity Professional Certificate</h3>
+                            <p class="cert-desc">SOC, gestión de incidentes, fundamentos de redes y cumplimiento.</p>
+                        </div>
+                    </article>
+                    <article class="cert-card">
+                        <div class="cert-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                        <div class="cert-body">
+                            <span class="cert-issuer">CompTIA</span>
+                            <h3 class="cert-title">Security+</h3>
+                            <p class="cert-desc">Operaciones de seguridad, criptografía aplicada y respuesta a incidentes.</p>
+                        </div>
+                    </article>
+                    <article class="cert-card">
+                        <div class="cert-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                        <div class="cert-body">
+                            <span class="cert-issuer">CompTIA</span>
+                            <h3 class="cert-title">CySA+ (Cybersecurity Analyst)</h3>
+                            <p class="cert-desc">Análisis de amenazas, threat hunting y monitoreo de comportamiento.</p>
+                        </div>
+                    </article>
+                    <article class="cert-card">
+                        <div class="cert-icon"><i class="fa-brands fa-python"></i></div>
+                        <div class="cert-body">
+                            <span class="cert-issuer">freeCodeCamp</span>
+                            <h3 class="cert-title">Scientific Computing with Python</h3>
+                            <p class="cert-desc">Algoritmos, estructuras de datos y resolución de problemas en Python.</p>
+                        </div>
+                    </article>
+                    <article class="cert-card">
+                        <div class="cert-icon"><i class="fa-solid fa-chart-line"></i></div>
+                        <div class="cert-body">
+                            <span class="cert-issuer">freeCodeCamp</span>
+                            <h3 class="cert-title">Data Analysis with Python</h3>
+                            <p class="cert-desc">NumPy, Pandas, Matplotlib y análisis exploratorio.</p>
+                        </div>
+                    </article>
+                    <article class="cert-card">
+                        <div class="cert-icon"><i class="fa-solid fa-brain"></i></div>
+                        <div class="cert-body">
+                            <span class="cert-issuer">freeCodeCamp</span>
+                            <h3 class="cert-title">Machine Learning with Python</h3>
+                            <p class="cert-desc">Modelos supervisados/no supervisados y redes neuronales con TensorFlow.</p>
+                        </div>
+                    </article>
+                    <article class="cert-card">
+                        <div class="cert-icon"><i class="fa-solid fa-square-root-variable"></i></div>
+                        <div class="cert-body">
+                            <span class="cert-issuer">freeCodeCamp</span>
+                            <h3 class="cert-title">College Algebra with Python</h3>
+                            <p class="cert-desc">Álgebra aplicada al código: ecuaciones, funciones y modelado matemático.</p>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
 
+        <!-- =========================== SERVICIOS =========================== -->
+        <section id="servicios" class="services reveal">
+            <div class="container">
+                <header class="section-head">
+                    <span class="section-eyebrow">// 06 — Qué hago</span>
+                    <h2 class="section-title">Servicios</h2>
+                    <p class="section-sub">Cuatro líneas de trabajo. Todas auditables, documentadas y orientadas a producción.</p>
+                </header>
+                <div class="services-grid">
+                    <article class="service-card">
+                        <div class="service-num">01</div>
+                        <i class="fa-solid fa-code service-ico" aria-hidden="true"></i>
+                        <h3 class="service-title">Desarrollo a medida</h3>
+                        <p class="service-desc">Aplicaciones de escritorio, servicios y APIs en C# / .NET y Python.</p>
+                        <ul class="service-bullets">
+                            <li>Arquitectura limpia y modular</li>
+                            <li>Integraciones con APIs de terceros</li>
+                            <li>Persistencia con PostgreSQL / MySQL</li>
+                        </ul>
+                    </article>
+                    <article class="service-card">
+                        <div class="service-num">02</div>
+                        <i class="fa-solid fa-robot service-ico" aria-hidden="true"></i>
+                        <h3 class="service-title">Automatización &amp; Bots</h3>
+                        <p class="service-desc">Bots de mensajería, trading, scraping y orquestación de procesos.</p>
+                        <ul class="service-bullets">
+                            <li>Telegram / WhatsApp (Evolution API · Meta · Twilio)</li>
+                            <li>OCR de documentos y validaciones</li>
+                            <li>IA local con Ollama</li>
+                        </ul>
+                    </article>
+                    <article class="service-card">
+                        <div class="service-num">03</div>
+                        <i class="fa-solid fa-shield-halved service-ico" aria-hidden="true"></i>
+                        <h3 class="service-title">Auditoría ISO 27001/27002</h3>
+                        <p class="service-desc">Revisión de controles, políticas y trazabilidad alineadas a la familia ISO/IEC 27000.</p>
+                        <ul class="service-bullets">
+                            <li>Inventario de activos y matriz de riesgo</li>
+                            <li>Política de accesos y registro de eventos</li>
+                            <li>Plan de continuidad e incidentes</li>
+                        </ul>
+                    </article>
+                    <article class="service-card">
+                        <div class="service-num">04</div>
+                        <i class="fa-solid fa-chalkboard-user service-ico" aria-hidden="true"></i>
+                        <h3 class="service-title">Consultoría técnica</h3>
+                        <p class="service-desc">Asesoramiento sobre stack, arquitectura, despliegue y hardening.</p>
+                        <ul class="service-bullets">
+                            <li>Migraciones y refactors</li>
+                            <li>CI/CD y entornos reproducibles</li>
+                            <li>Hardening de servicios y endpoints</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================== FAQ =========================== -->
+        <section id="faq" class="faq reveal">
+            <div class="container">
+                <header class="section-head">
+                    <span class="section-eyebrow">// 07 — Preguntas frecuentes</span>
+                    <h2 class="section-title">FAQ</h2>
+                    <p class="section-sub">Lo que más me preguntan antes de iniciar un proyecto.</p>
+                </header>
+                <div class="faq-list">
+                    <details class="faq-item">
+                        <summary>
+                            <span class="faq-q">¿Trabajás 100% remoto?</span>
+                            <span class="faq-icon" aria-hidden="true"><i class="fa-solid fa-plus"></i></span>
+                        </summary>
+                        <div class="faq-a">
+                            <p>Sí. Trabajo desde Entre Ríos, Argentina, con clientes de cualquier zona horaria. Coordinamos por email, Telegram o videollamada según el formato del proyecto.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>
+                            <span class="faq-q">¿Firmás NDA y acuerdos de confidencialidad?</span>
+                            <span class="faq-icon" aria-hidden="true"><i class="fa-solid fa-plus"></i></span>
+                        </summary>
+                        <div class="faq-a">
+                            <p>Por supuesto. Trabajo bajo NDA estándar o el modelo del cliente. Toda credencial, dato sensible o material entregado se trata bajo principio de mínimo privilegio.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>
+                            <span class="faq-q">¿Qué tecnologías priorizás en proyectos nuevos?</span>
+                            <span class="faq-icon" aria-hidden="true"><i class="fa-solid fa-plus"></i></span>
+                        </summary>
+                        <div class="faq-a">
+                            <p>Para automatización y datos, Python (Django/Flask/FastAPI) con PostgreSQL. Para apps de escritorio o servicios .NET, C# / .NET 8. Para IA local, Ollama. Todo en Docker cuando corresponde.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>
+                            <span class="faq-q">¿Brindás soporte después de la entrega?</span>
+                            <span class="faq-icon" aria-hidden="true"><i class="fa-solid fa-plus"></i></span>
+                        </summary>
+                        <div class="faq-a">
+                            <p>Sí, con planes de mantenimiento mensual o por bolsa de horas. Incluye monitoreo, parches de seguridad, ajustes menores y soporte por canal preferido.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>
+                            <span class="faq-q">¿Cómo manejás los datos de mis usuarios finales?</span>
+                            <span class="faq-icon" aria-hidden="true"><i class="fa-solid fa-plus"></i></span>
+                        </summary>
+                        <div class="faq-a">
+                            <p>Solo los necesarios para la función del sistema, almacenados con el mínimo privilegio y con bitácora de eventos. Las APIs de telefonía móvil que utilizo (WhatsApp / Meta / Twilio) son únicamente para contactar clientes; no se recopilan ni comercializan datos. Detalle completo en <a href="/policies-and-privacy">Políticas y Privacidad</a>.</p>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================== CONTACTO =========================== -->
         <section id="contacto" class="contact reveal">
             <div class="container">
-                <h2 class="section-title">Contacto</h2>
+                <header class="section-head">
+                    <span class="section-eyebrow">// 08 — Iniciemos</span>
+                    <h2 class="section-title">Contacto</h2>
+                    <p class="section-sub">¿Tenés un proyecto? Contame el alcance y te respondo a la brevedad.</p>
+                </header>
+
                 <div class="contact-content">
-                    <div class="contact-info">
+                    <aside class="contact-info">
                         <h3>Hablemos</h3>
-                        <p>¿Tienes un proyecto en mente? ¡Me encantaría escucharlo!</p>
-                        <p>Completá el formulario y te responderé a la brevedad.</p>
+                        <p>Completá el formulario o escribime directamente por cualquiera de estos canales.</p>
+
+                        <ul class="contact-channels">
+                            <li>
+                                <i class="fa-solid fa-envelope"></i>
+                                <a href="mailto:admin@bravos.com.ar">admin@bravos.com.ar</a>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-phone"></i>
+                                <a href="tel:+541125421727">+54 11 2542 1727</a>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-location-dot"></i>
+                                <span>Entre Ríos, Argentina</span>
+                            </li>
+                        </ul>
+
                         <div class="social-buttons">
                             <a href="https://t.me/codentools_bot" target="_blank" rel="noopener noreferrer" class="btn-social btn-telegram">
                                 <i class="fab fa-telegram"></i> Telegram
@@ -96,42 +503,97 @@
                             <a href="https://www.instagram.com/codentools" target="_blank" rel="noopener noreferrer" class="btn-social btn-instagram">
                                 <i class="fab fa-instagram"></i> Instagram
                             </a>
+                            <a href="https://www.facebook.com/profile.php?id=61570754819991&locale=es_LA" target="_blank" rel="noopener noreferrer" class="btn-social btn-facebook">
+                                <i class="fab fa-facebook"></i> Facebook
+                            </a>
                         </div>
-                    </div>
-                    <form class="contact-form" id="contact-form">
+                    </aside>
+
+                    <form class="contact-form" id="contact-form" novalidate>
                         <div class="form-row">
-                            <div class="form-group">
+                            <div class="form-group form-group--float">
+                                <input type="text" id="firstName" name="firstName" required maxlength="120" autocomplete="given-name" placeholder=" ">
                                 <label for="firstName">Nombre *</label>
-                                <input type="text" id="firstName" name="firstName" required maxlength="120" autocomplete="given-name">
+                                <span class="form-line" aria-hidden="true"></span>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group form-group--float">
+                                <input type="text" id="lastName" name="lastName" required maxlength="120" autocomplete="family-name" placeholder=" ">
                                 <label for="lastName">Apellido *</label>
-                                <input type="text" id="lastName" name="lastName" required maxlength="120" autocomplete="family-name">
+                                <span class="form-line" aria-hidden="true"></span>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group form-group--float">
+                            <input type="email" id="email" name="email" required maxlength="254" autocomplete="email" inputmode="email" placeholder=" ">
                             <label for="email">Correo electrónico *</label>
-                            <input type="email" id="email" name="email" required maxlength="254" autocomplete="email" inputmode="email">
+                            <span class="form-line" aria-hidden="true"></span>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group form-group--float">
+                            <input type="tel" id="phone" name="phone" maxlength="32" autocomplete="tel" inputmode="tel" placeholder=" ">
                             <label for="phone">Teléfono (opcional)</label>
-                            <input type="tel" id="phone" name="phone" maxlength="32" autocomplete="tel" inputmode="tel">
+                            <span class="form-line" aria-hidden="true"></span>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group form-group--float form-group--textarea">
+                            <textarea id="message" name="message" rows="5" required maxlength="8000" placeholder=" "></textarea>
                             <label for="message">Mensaje *</label>
-                            <textarea id="message" name="message" rows="5" required maxlength="8000"></textarea>
+                            <span class="form-line" aria-hidden="true"></span>
+                            <span class="form-counter" id="message-counter">0 / 8000</span>
                         </div>
-                        <button type="submit" class="btn-submit">Enviar mensaje</button>
-                        <div id="form-status" class="form-status"></div>
+                        <button type="submit" class="btn-submit">
+                            <span>Enviar mensaje</span>
+                            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+                        </button>
+                        <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
                     </form>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="footer reveal">
-        <div class="container">
-            <p>&copy; 2026 | CodeNTools. Todos los derechos reservados.</p>
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <a href="#inicio" class="logo-link footer-logo">
+                    <span class="logo-bracket" aria-hidden="true">[</span>
+                    <span class="logo-text">Code<span class="logo-sep">N</span>Tools</span>
+                    <span class="logo-bracket" aria-hidden="true">]</span>
+                </a>
+                <p class="footer-tag">Software a medida, automatización y ciberseguridad alineada a ISO/IEC 27001/27002.</p>
+                <div class="footer-socials">
+                    <a href="https://t.me/codentools_bot" target="_blank" rel="noopener" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="https://www.instagram.com/codentools" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=61570754819991&locale=es_LA" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4 class="footer-col-title">Navegación</h4>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#sobre-mi">Sobre Mí</a></li>
+                    <li><a href="#stack">Stack</a></li>
+                    <li><a href="#proyectos">Proyectos</a></li>
+                    <li><a href="#certificaciones">Certificaciones</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 class="footer-col-title">Contacto</h4>
+                <ul>
+                    <li><a href="mailto:admin@bravos.com.ar">admin@bravos.com.ar</a></li>
+                    <li><a href="tel:+541125421727">+54 11 2542 1727</a></li>
+                    <li>Entre Ríos, Argentina</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 class="footer-col-title">Legal</h4>
+                <ul>
+                    <li><a href="/policies-and-privacy">Políticas y Privacidad</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 CodeNTools — Sergio Bravo. Todos los derechos reservados.</p>
+            <p class="footer-meta">v2.0 · Status: <span class="status-dot status-dot--inline"></span> Operativo</p>
         </div>
     </footer>
 
