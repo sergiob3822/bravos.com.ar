@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Políticas y Privacidad de CodeNTools (Sergio Bravo) — qué datos recopilamos, cómo se usan y por qué las APIs de telefonía móvil que utilizamos no recopilan datos de los usuarios.">
+    <meta name="theme-color" content="#060a08">
+    <meta name="color-scheme" content="dark">
+    <meta name="robots" content="index, follow">
+    <title>Políticas y Privacidad | CodeNTools</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="scroll-progress" aria-hidden="true">
+        <div class="scroll-progress-bar" id="scroll-progress-bar"></div>
+    </div>
+
+    <canvas id="bg-network" class="bg-network" aria-hidden="true"></canvas>
+
+    <a href="#contenido" class="skip-link">Saltar al contenido</a>
+
+    <header class="header" id="site-header">
+        <div class="container header-inner">
+            <div class="logo">
+                <a href="/" class="logo-link" aria-label="Code N Tools — Inicio">
+                    <span class="logo-bracket" aria-hidden="true">[</span>
+                    <span class="logo-text">Code<span class="logo-sep">N</span>Tools</span>
+                    <span class="logo-bracket" aria-hidden="true">]</span>
+                    <span class="logo-status" aria-label="Estado: en línea">
+                        <span class="status-dot"></span>
+                        <span class="status-label">ONLINE</span>
+                    </span>
+                </a>
+            </div>
+
+            <nav class="nav nav--desktop" aria-label="Navegación principal">
+                <a href="/#inicio" class="nav-link"><span class="nav-link-num">01</span>Inicio</a>
+                <a href="/#sobre-mi" class="nav-link"><span class="nav-link-num">02</span>Sobre Mí</a>
+                <a href="/#stack" class="nav-link"><span class="nav-link-num">03</span>Stack</a>
+                <a href="/#proyectos" class="nav-link"><span class="nav-link-num">04</span>Proyectos</a>
+                <a href="/#certificaciones" class="nav-link"><span class="nav-link-num">05</span>Certificaciones</a>
+                <a href="/#contacto" class="nav-link"><span class="nav-link-num">06</span>Contacto</a>
+                <a href="/policies-and-privacy" class="nav-cta" aria-current="page">
+                    <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                    <span>Políticas y Privacidad</span>
+                </a>
+            </nav>
+
+            <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-drawer">
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="mobile-drawer" id="mobile-drawer" hidden aria-hidden="true">
+        <div class="mobile-drawer-backdrop" data-drawer-close></div>
+        <nav class="mobile-drawer-panel" aria-label="Navegación móvil">
+            <div class="mobile-drawer-head">
+                <span class="mobile-drawer-label">// MENÚ</span>
+                <button type="button" class="mobile-drawer-close" data-drawer-close aria-label="Cerrar menú">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+            <ul class="mobile-drawer-list">
+                <li style="--i:0"><a href="/#inicio"><span class="num">01</span>Inicio</a></li>
+                <li style="--i:1"><a href="/#sobre-mi"><span class="num">02</span>Sobre Mí</a></li>
+                <li style="--i:2"><a href="/#stack"><span class="num">03</span>Stack</a></li>
+                <li style="--i:3"><a href="/#proyectos"><span class="num">04</span>Proyectos</a></li>
+                <li style="--i:4"><a href="/#certificaciones"><span class="num">05</span>Certificaciones</a></li>
+                <li style="--i:5"><a href="/#servicios"><span class="num">06</span>Servicios</a></li>
+                <li style="--i:6"><a href="/#contacto"><span class="num">07</span>Contacto</a></li>
+                <li style="--i:7"><a href="/policies-and-privacy" class="is-cta"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Políticas y Privacidad</a></li>
+            </ul>
+            <div class="mobile-drawer-foot">
+                <a href="https://t.me/codentools_bot" target="_blank" rel="noopener" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://www.instagram.com/codentools" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=61570754819991&locale=es_LA" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+            </div>
+        </nav>
+    </div>
+
+    <main id="contenido">
+        <section class="policies">
+            <div class="container">
+                <header class="policies-hero reveal">
+                    <span class="section-eyebrow">// Documento legal</span>
+                    <h1>Política de Privacidad</h1>
+                    <p class="policies-meta">
+                        Última actualización: <strong>18 de abril de 2026</strong> &middot; Versión 1.1
+                    </p>
+                </header>
+
+                <div class="policies-content">
+
+                    <article class="policy-section reveal">
+                        <span class="policy-num">00</span>
+                        <h2>Responsable del Tratamiento</h2>
+                        <ul>
+                            <li><strong>Responsable:</strong> Sergio Bravo</li>
+                            <li><strong>Sitio Web:</strong> <a href="https://bravos.com.ar" target="_blank" rel="noopener noreferrer">bravos.com.ar</a></li>
+                            <li><strong>Contacto:</strong> <a href="mailto:admin@bravos.com.ar">admin@bravos.com.ar</a></li>
+                            <li><strong>Ubicación:</strong> Entre Ríos, Argentina</li>
+                        </ul>
+                    </article>
+
+                    <article class="policy-section reveal">
+                        <span class="policy-num">01</span>
+                        <h2>1. Información que Recolectamos</h2>
+                        <p>Para el funcionamiento del portafolio y las integraciones de API, podemos tratar los siguientes datos:</p>
+                        <ul>
+                            <li><strong>Datos Identificativos:</strong> Nombre, apellido y país de residencia.</li>
+                            <li><strong>Datos de Contacto:</strong> Correo electrónico, número de teléfono (+54 11 25421727) y perfiles de redes sociales o mensajería (Telegram, Instagram, Facebook).</li>
+                            <li><strong>Datos de Conectividad:</strong> Direcciones IP, metadatos de mensajes procesados a través de APIs de terceros (WhatsApp/Twilio) y registros de túneles de conexión para asegurar la estabilidad del servicio.</li>
+                        </ul>
+                    </article>
+
+                    <article class="policy-section reveal">
+                        <span class="policy-num">02</span>
+                        <h2>2. Finalidad del Tratamiento</h2>
+                        <p>Utilizamos la información recolectada para:</p>
+                        <ul>
+                            <li>Gestionar y mostrar mi portafolio profesional y servicios de desarrollo.</li>
+                            <li>Operar y administrar las integraciones de APIs para automatización de mensajería.</li>
+                            <li>Establecer canales de comunicación directa con clientes y colaboradores a través de las redes sociales y bots proporcionados.</li>
+                            <li>Garantizar la seguridad técnica del sitio, monitorizando posibles errores de conexión o accesos no autorizados.</li>
+                        </ul>
+                    </article>
+
+                    <article class="policy-section reveal">
+                        <span class="policy-num">03</span>
+                        <h2>3. Servicios de Terceros y APIs</h2>
+                        <p>Este portafolio utiliza servicios de terceros que pueden procesar datos de manera independiente:</p>
+                        <ul>
+                            <li><strong>Infraestructura y Túneles:</strong> Para garantizar la disponibilidad del sitio bajo el dominio bravos.com.ar.</li>
+                            <li><strong>APIs de Mensajería:</strong> Procesamiento de flujos de comunicación mediante herramientas de automatización.</li>
+                            <li><strong>Redes Sociales:</strong> El sitio contiene enlaces a perfiles externos (Instagram, Facebook, Telegram). Al acceder a estos enlaces, el tratamiento de sus datos se rige por las políticas de dichas plataformas.</li>
+                        </ul>
+                    </article>
+
+                    <article class="policy-section is-highlight reveal">
+                        <span class="policy-num">04</span>
+                        <h2>4. Seguridad</h2>
+                        <p>Implementamos medidas técnicas para proteger sus datos personales. Se promueve el uso de métodos de autenticación seguros (como <strong>Passkeys</strong>) y protocolos de cifrado para todas las transferencias de datos entre las APIs y el servidor.</p>
+                        <p>Dada la naturaleza de las conexiones de red, <strong>no podemos garantizar la invulnerabilidad absoluta</strong>, pero trabajamos constantemente en minimizar riesgos de "micro-cortes" o brechas de seguridad.</p>
+                    </article>
+
+                    <article class="policy-section reveal">
+                        <span class="policy-num">05</span>
+                        <h2>5. Derechos del Usuario</h2>
+                        <p>Usted tiene derecho a consultar, rectificar o solicitar la eliminación de sus datos personales. Para ejercer estos derechos, puede enviar una comunicación a <a href="mailto:admin@bravos.com.ar">admin@bravos.com.ar</a>.</p>
+                    </article>
+
+                    <article class="policy-section reveal">
+                        <span class="policy-num">06</span>
+                        <h2>6. Contacto Directo</h2>
+                        <p>Para consultas adicionales sobre el tratamiento de datos en mis desarrollos o portafolio, puede contactarme a través de:</p>
+                        <div class="policy-socials">
+                            <a href="https://t.me/codentools_bot" target="_blank" rel="noopener noreferrer" class="btn-social btn-telegram">
+                                <i class="fa-brands fa-telegram" aria-hidden="true"></i>
+                                <span>
+                                    <span class="policy-social-label">Telegram</span>
+                                    <span class="policy-social-handle">codentools_bot</span>
+                                </span>
+                            </a>
+                            <a href="https://www.instagram.com/codentools" target="_blank" rel="noopener noreferrer" class="btn-social btn-instagram">
+                                <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                                <span>
+                                    <span class="policy-social-label">Instagram</span>
+                                    <span class="policy-social-handle">@codentools</span>
+                                </span>
+                            </a>
+                            <a href="https://www.facebook.com/profile.php?id=61570754819991&locale=es_LA" target="_blank" rel="noopener noreferrer" class="btn-social btn-facebook">
+                                <i class="fa-brands fa-facebook" aria-hidden="true"></i>
+                                <span>
+                                    <span class="policy-social-label">Facebook</span>
+                                    <span class="policy-social-handle">Perfil Profesional</span>
+                                </span>
+                            </a>
+                        </div>
+                    </article>
+
+                </div>
+
+                <div class="policies-back reveal">
+                    <a href="/" class="btn btn--ghost">
+                        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                        <span>Volver al inicio</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <a href="/" class="logo-link footer-logo">
+                    <span class="logo-bracket" aria-hidden="true">[</span>
+                    <span class="logo-text">Code<span class="logo-sep">N</span>Tools</span>
+                    <span class="logo-bracket" aria-hidden="true">]</span>
+                </a>
+                <p class="footer-tag">Software a medida, automatización y ciberseguridad alineada a ISO/IEC 27001/27002.</p>
+                <div class="footer-socials">
+                    <a href="https://t.me/codentools_bot" target="_blank" rel="noopener" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="https://www.instagram.com/codentools" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=61570754819991&locale=es_LA" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4 class="footer-col-title">Navegación</h4>
+                <ul>
+                    <li><a href="/#inicio">Inicio</a></li>
+                    <li><a href="/#sobre-mi">Sobre Mí</a></li>
+                    <li><a href="/#stack">Stack</a></li>
+                    <li><a href="/#proyectos">Proyectos</a></li>
+                    <li><a href="/#certificaciones">Certificaciones</a></li>
+                    <li><a href="/#servicios">Servicios</a></li>
+                    <li><a href="/#faq">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 class="footer-col-title">Contacto</h4>
+                <ul>
+                    <li><a href="mailto:admin@bravos.com.ar">admin@bravos.com.ar</a></li>
+                    <li><a href="tel:+541125421727">+54 11 2542 1727</a></li>
+                    <li>Entre Ríos, Argentina</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 class="footer-col-title">Legal</h4>
+                <ul>
+                    <li><a href="/policies-and-privacy">Políticas y Privacidad</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 CodeNTools — Sergio Bravo. Todos los derechos reservados.</p>
+            <p class="footer-meta">v2.0 · Status: <span class="status-dot status-dot--inline"></span> Operativo</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
